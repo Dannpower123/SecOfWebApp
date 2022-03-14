@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/customer")
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class CustomerController {
 
     @Autowired
@@ -57,8 +59,7 @@ public class CustomerController {
         return new ResponseEntity<Customer>(c, HttpStatus.CREATED);
     }
 
-
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/{customerID}", method = RequestMethod.DELETE, produces = "application/json")
     @Transactional
     public ResponseEntity<Void> deleteCustomer(@PathVariable("customerID") long customerID) {

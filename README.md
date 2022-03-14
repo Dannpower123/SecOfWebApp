@@ -10,6 +10,8 @@ To run the backend, you'll have to type in the following command:
 ./mvnw spring-boot:run
 ```
 
+This will init a In-Memory Database and init the REST-API.
+
 # Security
 
 Secured by JWT. How to deal with it?
@@ -22,6 +24,17 @@ POST https://localhost:9966/pvh/api/auth/signin
   "username": "test"
 }
 ```
+
+Alternative there is also a Customer Account:
+```
+POST https://localhost:9966/pvh/api/auth/signin
+
+{
+  "password": "testtest",
+  "username": "testCustomer"
+}
+```
+
 
 You'll get an Bearer Token, which you will need to provide to get access on Endpoints.
 With that Token you are able to sign up Customers:
